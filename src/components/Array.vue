@@ -1,0 +1,49 @@
+<template>
+  <div class="hello">
+    <div>arr: {{ state.arr }}</div>
+    <div>arr.len: {{ state.len }}</div>
+    <button @click="add">clickAdd</button>
+    <button @click="remove">clickRemove</button>
+  </div>
+</template>
+
+<script>
+import { reactive, computed, toRefs, watch } from "vue";
+
+export default {
+  name: "Reactive",
+  setup() {
+    // 只使用 reactive 的问题是，使用组合函数时必须始终保持对这个所返回对象的引用以保持响应性。这个对象不能被解构或展开：
+    // toRefs API 用来提供解决此约束的办法——它将响应式对象的每个 property 都转成了相应的 ref。
+    const state = reactive({
+      arr: [1, 2, 3],
+      len: computed(() => state.arr.length),
+    });
+
+    watch(state.arr, () => console.log(state.arr));
+
+    function add(params) {
+      state.arr.push(6);
+    }
+    function remove(params) {
+      state.arr.length && state.arr.pop();
+    }
+
+    return {
+      state,
+      add,
+      remove,
+    };
+    // return toRefs(state)
+    // 如果我们将此段逻辑抽离出去进行结构则需要使用 toRefs 使得其依然是响应式
+    // let {count, doubleCount} = xxx(export defaul xxx)
+  },
+};
+</script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped>
+button {
+  margin: 10px;
+}
+</style>

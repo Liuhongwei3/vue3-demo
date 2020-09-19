@@ -1,17 +1,26 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <img alt="Vue logo" src="./assets/logo.png" />
+  <!-- <Reactive /> -->
+  <!-- <Ref/> -->
+  <Array/>
+  <Object />
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Reactive from "./components/Reactive.vue";
+import Ref from "./components/Ref";
+import Array from "./components/Array";
+import Object from "./components/Object";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
-  }
-}
+    Reactive,
+    Ref,
+    Array,
+    Object,
+  },
+};
 </script>
 
 <style>
